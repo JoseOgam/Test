@@ -3,7 +3,8 @@ import React from "react";
 const HomePage = () => {
   return (
     <div>
-      <h2>Main page</h2>
+      <h2>Home page</h2>
+      <h1>React + Tailwindcss</h1>
     </div>
   );
 };

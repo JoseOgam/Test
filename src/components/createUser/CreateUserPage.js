@@ -1,127 +1,155 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import FormField from "./FormField";
+import "./CreateUser.css";
 
-const CreateUser = () => {
+//setting the initial values
+const initialValues = {
+  firstName: "",
+  lastName: "",
+  phone: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
+
+//creating the validation schema
+const validationSchema = yup.object().shape({
+  firstName: yup
+    .string()
+    .required("FirstName is required")
+    .min(3, "Name must be at least 3 characters")
+    .max(10, "Name must not be greater than 10 characters")
+    .test("alphabets", "Name must only contain alphabets", (value) => {
+      return /^[A-Za-z]+$/.test(value);
+    }),
+  lastName: yup
+    .string()
+    .required("Last is required")
+    .min(3, "Name must be at least 3 characters")
+    .max(10, "Name must not be greater than 10 characters")
+    .test("alphabets", "Name must only contain alphabets", (value) => {
+      return /^[A-Za-z]+$/.test(value);
+    }),
+  phone: yup
+    .number()
+    .required("phone number is required")
+    .positive("A phone number can't start with a minus")
+    .integer("A phone number can't include a decimal point")
+    .test("phone", "invalid phone number", (value) => {
+      return /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/.test(
+        value
+      );
+    }),
+  email: yup.string().email().required("Email is a required field"),
+  password: yup
+    .string()
+    .required("Please enter your password")
+    .matches(
+      /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+      "Password must contain at least 8 characters, one uppercase, one number and one special case character"
+    ),
+  confirmPassword: yup
+    .string()
+    .required("Please confirm your password")
+    .when("password", {
+      is: (password) => (password && password.length > 0 ? true : false),
+      then: yup.string().oneOf([yup.ref("password")], "Password doesn't match"),
+    }),
+});
+
+const CreateUser = ({ onSubmit }) => {
+  //using useFormik
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit,
+  });
+
+  //using formik.getFieldProps for input fields
+  const firstNameProps = formik.getFieldProps("firstName");
+  const lastNameProps = formik.getFieldProps("lastName");
+  const phoneProps = formik.getFieldProps("phone");
+  const emailProps = formik.getFieldProps("email");
+  const passwordProps = formik.getFieldProps("password");
+  const confirmPasswordProps = formik.getFieldProps("confirmPassword");
+
   return (
-    <div>
-      <h2>create page</h2>
-
-      <div className="container mx-auto">
-        <div className="flex justify-center px-12 my-10">
-          <div className="max-w-lg rounded-lg lg:rounded-l-none flex">
-            <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded">
-              <div className="mb-4 md:flex md:justify-between">
-                <div className="mb-4 md:mr-2 md:mb-0">
-                  <label
-                    className="block mb-2 text-sm font-bold text-gray-700"
-                    htmlFor="firstName"
-                  >
-                    First Name
-                  </label>
-                  <input
-                    className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                    id="firstName"
-                    type="text"
-                    placeholder="First Name"
-                  />
-                </div>
-                <div className="md:ml-2">
-                  <label
-                    className="block mb-2 text-sm font-bold text-gray-700"
-                    htmlFor="lastName"
-                  >
-                    Last Name
-                  </label>
-                  <input
-                    className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                    id="lastName"
-                    type="text"
-                    placeholder="Last Name"
-                  />
-                </div>
-              </div>
-              <div className="mb-4 md:flex md:justify-between">
-                <div className="mb-4 md:mr-2 md:mb-0">
-                  <label
-                    className="block mb-2 text-sm font-bold text-gray-700"
-                    htmlFor="email"
-                  >
-                    Email
-                  </label>
-                  <input
-                    className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                    id="email"
-                    type="email"
-                    placeholder="Email"
-                  />
-                </div>
-                <div className="md:ml-2">
-                  <label
-                    className="block mb-2 text-sm font-bold text-gray-700"
-                    htmlFor="phoneNumber"
-                  >
-                    Phone
-                  </label>
-                  <input
-                    className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                    id="phone"
-                    type="telephone"
-                    placeholder="Phone Number"
-                  />
-                </div>
-              </div>
-
-              <div className="mb-4 md:flex md:justify-between">
-                <div className="mb-4 md:mr-2 md:mb-0">
-                  <label
-                    className="block mb-2 text-sm font-bold text-gray-700"
-                    htmlFor="password"
-                  >
-                    Password
-                  </label>
-                  <input
-                    className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                    id="password"
-                    type="password"
-                    placeholder="password"
-                  />
-                </div>
-                <div className="md:ml-2">
-                  <label
-                    className="block mb-2 text-sm font-bold text-gray-700"
-                    htmlFor="c_password"
-                  >
-                    Confirm Password
-                  </label>
-                  <input
-                    className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                    id="c_password"
-                    type="password"
-                    placeholder="password"
-                  />
-                </div>
-              </div>
-              <div className="mb-6 text-center">
-                <button
-                  className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-                  type="button"
-                >
-                  Register Account
-                </button>
-              </div>
-              <hr className="mb-6 border-t" />
-
-              <div className="text-center">
-                <Link
-                  className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                  to="/login"
-                >
-                  Already have an account? Login!
-                </Link>
-              </div>
-            </form>
+    <div className="container mx-auto">
+      <div className="flex justify-center px-12 my-10">
+        <div className="max-w-lg rounded-lg lg:rounded-l-none flex"></div>
+        <form
+          onSubmit={formik.handleSubmit}
+          className="px-8 pt-6 pb-8 mb-4 bg-white rounded"
+        >
+          <div className="mb-4 md:flex md:justify-between"></div>
+          <FormField
+            label="firstName"
+            type="text"
+            placeholder="Please Enter your FirstName"
+            {...firstNameProps}
+          />
+          {formik.touched.firstName && formik.errors.firstName ? (
+            <div className="input-feedback">{formik.errors.firstName}</div>
+          ) : null}
+          <FormField
+            label="lastName"
+            type="text"
+            {...lastNameProps}
+            placeholder="Please Enter your LastName"
+          />
+          {formik.touched.lastName && formik.errors.lastName ? (
+            <div className="input-feedback">{formik.errors.lastName}</div>
+          ) : null}
+          <FormField
+            label="Phone"
+            type="telephone"
+            placeholder="Please Enter your phone number"
+            {...phoneProps}
+          />
+          {formik.touched.phone && formik.errors.phone ? (
+            <div className="input-feedback">{formik.errors.phone}</div>
+          ) : null}
+          <FormField
+            label="Email"
+            type="email"
+            placeholder="Please Enter your email"
+            {...emailProps}
+          />
+          {formik.touched.email && formik.errors.email ? (
+            <div className="input-feedback">{formik.errors.email}</div>
+          ) : null}
+          <FormField
+            label="Password"
+            type="password"
+            placeholder="Please Enter your password"
+            {...passwordProps}
+          />
+          {formik.touched.password && formik.errors.password ? (
+            <div className="input-feedback">{formik.errors.password}</div>
+          ) : null}
+          <FormField
+            label="Confirm Password"
+            type="password"
+            placeholder="Please Confirm your password"
+            {...confirmPasswordProps}
+          />
+          {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+            <div className="input-feedback">
+              {formik.errors.confirmPassword}
+            </div>
+          ) : null}
+          <div className="mb-6 text-center">
+            <button
+              className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+              type="submit"
+              isabled={!(formik.isValid && formik.dirty)}
+            >
+              Register Account
+            </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
