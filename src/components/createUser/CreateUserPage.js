@@ -78,10 +78,10 @@ const CreateUser = ({ onSubmit }) => {
   return (
     <div className=" mx-auto">
       <div className="flex justify-center px-12 my-10">
-        <div className="max-w-lg rounded-lg lg:rounded-l-none flex">
+        <div className="w-full rounded-lg lg:rounded-l-none flex">
           <form
             onSubmit={formik.handleSubmit}
-            className="px-4 pt-6 bg-white rounded"
+            className="px-6 pt-6 bg-white rounded"
           >
             <FormField
               label="firstName"

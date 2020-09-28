@@ -37,11 +37,11 @@ const LoginPage = () => (
       return (
         <div>
           <h1>User Login</h1>
-          <div className="flex justify-center px-12 my-10 mx-auto">
-            <div className="max-w-lg rounded-lg lg:rounded-l-none flex">
+          <div className="flex justify-center px-6 my-8 mx-auto">
+            <div className="w-full rounded-lg lg:rounded-l-none flex">
               <form
                 onSubmit={handleSubmit}
-                className="bg-white rounded px-2 pt-6"
+                className="bg-white rounded px-6 pt-6"
               >
                 <label htmlFor="email">Email</label>
                 <input
