@@ -78,78 +78,78 @@ const CreateUser = ({ onSubmit }) => {
   return (
     <div className="container mx-auto">
       <div className="flex justify-center px-12 my-10">
-        <div className="max-w-lg rounded-lg lg:rounded-l-none flex"></div>
-        <form
-          onSubmit={formik.handleSubmit}
-          className="px-8 pt-6 pb-8 mb-4 bg-white rounded"
-        >
-          <div className="mb-4 md:flex md:justify-between"></div>
-          <FormField
-            label="firstName"
-            type="text"
-            placeholder="Please Enter your FirstName"
-            {...firstNameProps}
-          />
-          {formik.touched.firstName && formik.errors.firstName ? (
-            <div className="input-feedback">{formik.errors.firstName}</div>
-          ) : null}
-          <FormField
-            label="lastName"
-            type="text"
-            {...lastNameProps}
-            placeholder="Please Enter your LastName"
-          />
-          {formik.touched.lastName && formik.errors.lastName ? (
-            <div className="input-feedback">{formik.errors.lastName}</div>
-          ) : null}
-          <FormField
-            label="Phone"
-            type="telephone"
-            placeholder="Please Enter your phone number"
-            {...phoneProps}
-          />
-          {formik.touched.phone && formik.errors.phone ? (
-            <div className="input-feedback">{formik.errors.phone}</div>
-          ) : null}
-          <FormField
-            label="Email"
-            type="email"
-            placeholder="Please Enter your email"
-            {...emailProps}
-          />
-          {formik.touched.email && formik.errors.email ? (
-            <div className="input-feedback">{formik.errors.email}</div>
-          ) : null}
-          <FormField
-            label="Password"
-            type="password"
-            placeholder="Please Enter your password"
-            {...passwordProps}
-          />
-          {formik.touched.password && formik.errors.password ? (
-            <div className="input-feedback">{formik.errors.password}</div>
-          ) : null}
-          <FormField
-            label="Confirm Password"
-            type="password"
-            placeholder="Please Confirm your password"
-            {...confirmPasswordProps}
-          />
-          {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-            <div className="input-feedback">
-              {formik.errors.confirmPassword}
+        <div className="max-w-lg rounded-lg lg:rounded-l-none flex">
+          <form
+            onSubmit={formik.handleSubmit}
+            className="px-8 pt-6 pb-8 mb-4 bg-white rounded"
+          >
+            <FormField
+              label="firstName"
+              type="text"
+              placeholder="Please Enter your FirstName"
+              {...firstNameProps}
+            />
+            {formik.touched.firstName && formik.errors.firstName ? (
+              <div className="input-feedback">{formik.errors.firstName}</div>
+            ) : null}
+            <FormField
+              label="lastName"
+              type="text"
+              {...lastNameProps}
+              placeholder="Please Enter your LastName"
+            />
+            {formik.touched.lastName && formik.errors.lastName ? (
+              <div className="input-feedback">{formik.errors.lastName}</div>
+            ) : null}
+            <FormField
+              label="Phone"
+              type="telephone"
+              placeholder="Please Enter your phone number"
+              {...phoneProps}
+            />
+            {formik.touched.phone && formik.errors.phone ? (
+              <div className="input-feedback">{formik.errors.phone}</div>
+            ) : null}
+            <FormField
+              label="Email"
+              type="email"
+              placeholder="Please Enter your email"
+              {...emailProps}
+            />
+            {formik.touched.email && formik.errors.email ? (
+              <div className="input-feedback">{formik.errors.email}</div>
+            ) : null}
+            <FormField
+              label="Password"
+              type="password"
+              placeholder="Please Enter your password"
+              {...passwordProps}
+            />
+            {formik.touched.password && formik.errors.password ? (
+              <div className="input-feedback">{formik.errors.password}</div>
+            ) : null}
+            <FormField
+              label="Confirm Password"
+              type="password"
+              placeholder="Please Confirm your password"
+              {...confirmPasswordProps}
+            />
+            {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+              <div className="input-feedback">
+                {formik.errors.confirmPassword}
+              </div>
+            ) : null}
+            <div className="mb-6 text-center">
+              <button
+                className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                type="submit"
+                isabled={!(formik.isValid && formik.dirty)}
+              >
+                Register Account
+              </button>
             </div>
-          ) : null}
-          <div className="mb-6 text-center">
-            <button
-              className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-              type="submit"
-              isabled={!(formik.isValid && formik.dirty)}
-            >
-              Register Account
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );

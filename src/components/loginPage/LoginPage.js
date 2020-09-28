@@ -37,33 +37,37 @@ const LoginPage = () => (
       return (
         <div>
           <h1>User Login</h1>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              name="email"
-              type="text"
-              placeholder="Enter your email"
-              value={values.email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className={errors.email && touched.email && "error"}
-            />
-            {errors.email && touched.email && (
-              <div className="input-feedback">{errors.email}</div>
-            )}
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Enter your password"
-            />
+          <div className="flex justify-center px-12 my-10">
+            <div className="max-w-lg rounded-lg lg:rounded-l-none flex">
+              <form onSubmit={handleSubmit}>
+                <label htmlFor="email">Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="text"
+                  placeholder="Enter your email"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={errors.email && touched.email && "error"}
+                />
+                {errors.email && touched.email && (
+                  <div className="input-feedback">{errors.email}</div>
+                )}
+                <label htmlFor="password">Password</label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="Enter your password"
+                />
 
-            <button type="submit" disabled={isSubmitting}>
-              Login
-            </button>
-          </form>
+                <button type="submit" disabled={isSubmitting}>
+                  Login
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       );
     }}
