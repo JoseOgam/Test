@@ -37,9 +37,12 @@ const LoginPage = () => (
       return (
         <div>
           <h1>User Login</h1>
-          <div className="flex justify-center px-12 my-10">
+          <div className="flex justify-center px-12 my-10 mx-auto">
             <div className="max-w-lg rounded-lg lg:rounded-l-none flex">
-              <form onSubmit={handleSubmit}>
+              <form
+                onSubmit={handleSubmit}
+                className="bg-white rounded px-12 pt-10"
+              >
                 <label htmlFor="email">Email</label>
                 <input
                   id="email"
@@ -61,10 +64,15 @@ const LoginPage = () => (
                   type="password"
                   placeholder="Enter your password"
                 />
-
-                <button type="submit" disabled={isSubmitting}>
-                  Login
-                </button>
+                <div className="mb-6 text-center">
+                  <button
+                    className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    Login
+                  </button>
+                </div>
               </form>
             </div>
           </div>

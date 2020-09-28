@@ -76,12 +76,12 @@ const CreateUser = ({ onSubmit }) => {
   const confirmPasswordProps = formik.getFieldProps("confirmPassword");
 
   return (
-    <div className="container mx-auto">
+    <div className=" mx-auto">
       <div className="flex justify-center px-12 my-10">
         <div className="max-w-lg rounded-lg lg:rounded-l-none flex">
           <form
             onSubmit={formik.handleSubmit}
-            className="px-8 pt-6 pb-8 mb-4 bg-white rounded"
+            className="px-12 pt-10 bg-white rounded"
           >
             <FormField
               label="firstName"
@@ -143,7 +143,9 @@ const CreateUser = ({ onSubmit }) => {
               <button
                 className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                 type="submit"
-                isabled={!(formik.isValid && formik.dirty)}
+                isabled={
+                  formik.isValid && formik.dirty ? initialValues : undefined
+                }
               >
                 Register Account
               </button>
