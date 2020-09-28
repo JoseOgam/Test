@@ -41,7 +41,7 @@ const LoginPage = () => (
             <div className="max-w-lg rounded-lg lg:rounded-l-none flex">
               <form
                 onSubmit={handleSubmit}
-                className="bg-white rounded px-12 pt-10"
+                className="bg-white rounded px-2 pt-6"
               >
                 <label htmlFor="email">Email</label>
                 <input

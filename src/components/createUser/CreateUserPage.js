@@ -81,7 +81,7 @@ const CreateUser = ({ onSubmit }) => {
         <div className="max-w-lg rounded-lg lg:rounded-l-none flex">
           <form
             onSubmit={formik.handleSubmit}
-            className="px-12 pt-10 bg-white rounded"
+            className="px-4 pt-6 bg-white rounded"
           >
             <FormField
               label="firstName"
