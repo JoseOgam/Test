@@ -37,7 +37,7 @@ const LoginPage = () => (
       return (
         <div>
           <h1>User Login</h1>
-          <div className="flex justify-center px-6 my-8 mx-auto">
+          <div className="flex justify-center px-2 my-4 mx-auto">
             <div className="w-full rounded-lg lg:rounded-l-none flex">
               <form
                 onSubmit={handleSubmit}

@@ -77,7 +77,7 @@ const CreateUser = ({ onSubmit }) => {
 
   return (
     <div className=" mx-auto">
-      <div className="flex justify-center px-12 my-10">
+      <div className="flex justify-center px-2 my-4">
         <div className="w-full rounded-lg lg:rounded-l-none flex">
           <form
             onSubmit={formik.handleSubmit}
