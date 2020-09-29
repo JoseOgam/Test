@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import axios from "axios";
 import FormField from "./FormField";
 import "./CreateUser.css";
 
@@ -59,12 +60,25 @@ const validationSchema = yup.object().shape({
     }),
 });
 
-const CreateUser = ({ onSubmit }) => {
+const CreateUser = () => {
+  //saving user's data
+  //saving user's data
+  const saveUsers = async () => {
+    await axios
+      .post(`https://hidden-everglades-98624.herokuapp.com/api/user`)
+      .then((response) => {
+        console.log("Response is" + response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   //using useFormik
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit,
+    onSubmit: saveUsers(),
   });
 
   //using formik.getFieldProps for input fields

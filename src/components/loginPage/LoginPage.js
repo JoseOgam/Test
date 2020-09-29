@@ -16,11 +16,8 @@ const LoginPage = () => (
       return errors;
     }}
     initialValues={{ email: "", password: "" }}
-    onSubmit={(values, { setSubmitting }) => {
-      setTimeout(() => {
-        console.log("Logging in", values);
-        setSubmitting(false);
-      }, 500);
+    onSubmit={(values) => {
+      alert(JSON.stringify(values, null, 2));
     }}
   >
     {(props) => {
